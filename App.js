@@ -11,6 +11,7 @@ import session from "express-session";
 import "dotenv/config";
 
 const CONNECTION_STRING = process.env.DB_CONN_STRING || 'mongodb://127.0.0.1:27017';
+const FRONT_END_STRING = process.env.FRONTEND_URL_NETLIFY || process.env.FRONTEND_URL;
 
 mongoose.connect(CONNECTION_STRING, { dbName: 'kanbas' });
 const app = express();
@@ -18,7 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: FRONT_END_STRING
 }));
 
 const sessionOptions = {
